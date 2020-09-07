@@ -5,8 +5,10 @@ import androidx.core.content.ContextCompat;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.meugmail.R;
 
@@ -46,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
             favoritado = mBundle.getString("favoritado");
         }
 
-
+    try {
         if (favoritado.equals("nao")) {
             mFavorite.clearColorFilter();
             favoritado = "nao";
@@ -55,6 +57,24 @@ public class DetailActivity extends AppCompatActivity {
                     R.color.colorOrange));
             favoritado = "sim";
         }
+
+    }catch (Exception e){
+
+        Toast.makeText(this, "Ocorreu um problema ao favoritar a mensagem!", Toast.LENGTH_SHORT).show();
+        }
+
+
+//        mFavorite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (mFavorite.getColorFilter() != null) {
+//                    mFavorite.clearColorFilter();
+//                } else {
+//                    mFavorite.setColorFilter(ContextCompat.getColor(DetailActivity.this,
+//                            R.color.colorOrange));
+//                }
+//            }
+//        });
 
     }
 }
