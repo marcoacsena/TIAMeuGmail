@@ -24,6 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    EmailData mEmail;
     RecyclerView rvEmails;
     MailAdapter mailAdapter;
     List<EmailData> mEmailData = new ArrayList<>();
@@ -42,20 +43,15 @@ public class MainActivity extends AppCompatActivity {
         initComponents();
         criarEmail();
 
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(MainActivity.this,
-                LinearLayoutManager.VERTICAL, false);
-        rvEmails.addItemDecoration(new DividerItemDecoration(MainActivity.this,
-                DividerItemDecoration.VERTICAL));
-        rvEmails.setLayoutManager(mLinearLayoutManager);
-        mailAdapter = new MailAdapter(MainActivity.this, mEmailData);
-        rvEmails.setAdapter(mailAdapter);
-
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                adicionarEmail();
+
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }
@@ -64,22 +60,34 @@ public class MainActivity extends AppCompatActivity {
 
         rvEmails = findViewById(R.id.rvEmails);
         fab = findViewById(R.id.fab);
+
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(MainActivity.this,
+                LinearLayoutManager.VERTICAL, false);
+        rvEmails.addItemDecoration(new DividerItemDecoration(MainActivity.this,
+                DividerItemDecoration.VERTICAL));
+        rvEmails.setLayoutManager(mLinearLayoutManager);
+        mailAdapter = new MailAdapter(MainActivity.this, mEmailData);
+        rvEmails.setAdapter(mailAdapter);
+
     }
 
 
     private void criarEmail() {
-        EmailData mEmail = new EmailData("Marco Sena", "Weekend adventure",
+        mEmail = new EmailData("Marco Sena", "Weekend adventure",
                 "Let's go fishing with John and others. We will do some barbecue and have soo much fun",
                 "10:42am");
         mEmailData.add(mEmail);
+
         mEmail = new EmailData("Facebook", "James, you have 1 new notification",
                 "A lot has happened on Facebook since",
                 "16:04pm");
         mEmailData.add(mEmail);
+
         mEmail = new EmailData("Google+", "Top suggested Google+ pages for you",
                 "Top suggested Google+ pages for you",
                 "18:44pm");
         mEmailData.add(mEmail);
+
         mEmail = new EmailData("Twitter", "Follow T-Mobile, Samsung Mobile U",
                 "James, some people you may know",
                 "20:04pm");
@@ -92,7 +100,21 @@ public class MainActivity extends AppCompatActivity {
                 "Don't forget kiss me every night before you sleep!",
                 "01:04am");
         mEmailData.add(mEmail);
+
     }
+
+
+    private void adicionarEmail() {
+
+        EmailData emailAdiconado = new EmailData("Administrator", "New email",
+                "Teste do FAB que adicona emails!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
+                        "............................................................................",
+                "10:42am");
+        mEmailData.add(0,emailAdiconado);
+        mailAdapter.notifyItemInserted(0);
+        rvEmails.scrollToPosition(0);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
