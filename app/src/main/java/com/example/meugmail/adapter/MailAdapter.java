@@ -42,8 +42,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final MailViewHolder holder, int position) {
-
+    public void onBindViewHolder(final MailViewHolder holder, final int position) {
 
         holder.mIcon.setText(mEmailData.get(position).getmSender().substring(0, 1));
         holder.mSender.setText(mEmailData.get(position).getmSender());
@@ -51,6 +50,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailViewHolder> {
         holder.mEmailDetails.setText(mEmailData.get(position).getmDetails());
         holder.mEmailTime.setText(mEmailData.get(position).getmTime());
         Random mRandom = new Random();
+
+        //Esse código é o responsável pela cor dos ícones redondos, no início de cada mensagem
         final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
         ((GradientDrawable) holder.mIcon.getBackground()).setColor(color);
 
@@ -75,6 +76,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
+
+                mIntent.putExtra("posicao", position);
                 mIntent.putExtra("sender", holder.mSender.getText().toString());
                 mIntent.putExtra("title", holder.mEmailTitle.getText().toString());
                 mIntent.putExtra("details", holder.mEmailDetails.getText().toString());
