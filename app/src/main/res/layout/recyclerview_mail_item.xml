@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<com.balysv.materialripple.MaterialRippleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ripple"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
@@ -76,3 +85,5 @@
         android:src="@drawable/ic_star_black_24dp" />">
 
 </RelativeLayout>
+
+</com.balysv.materialripple.MaterialRippleLayout>
